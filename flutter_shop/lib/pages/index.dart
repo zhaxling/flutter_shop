@@ -4,6 +4,7 @@ import 'home_page.dart';
 import 'category_page.dart';
 import 'shopping_page.dart';
 import 'me_page.dart';
+import 'dart:io';
 
 class RootPage extends StatefulWidget {
 
@@ -47,6 +48,19 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
 
+    if (Platform.isIOS) {
+      return _iOSScaffold(context);
+    }
+    else {
+      return _androidScaffold(context);
+    }
+
+  }
+
+  /*
+  * 安卓风格
+  * */
+  Widget _androidScaffold(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(245, 245, 245, 1.0),
       bottomNavigationBar: BottomNavigationBar(
@@ -69,6 +83,34 @@ class _RootPageState extends State<RootPage> {
         index: currentIndex,
         children: tabBodies,
       ),
+    );
+  }
+
+  /*
+  * iOS 风格
+  * CupertinoTabScaffold
+  * CupertinoTabBar
+  * CupertinoTabView组件
+  */
+  Widget _iOSScaffold(BuildContext context) {
+    return CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: tabBars,
+          activeColor: Colors.orange,
+          inactiveColor: Colors.black87,
+          backgroundColor: Color(0xfffffff1),
+          iconSize: 25.0,
+          onTap: (index) {
+            print("CupertinoTabBar 切换 $index");
+          },
+        ),
+        tabBuilder: (context, index) {
+          return CupertinoTabView(
+            builder: (context) {
+              return tabBodies[index];
+            },
+          );
+        }
     );
   }
 

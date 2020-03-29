@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'pages/index.dart';
 import 'package:provide/provide.dart';
 import 'provide/Counter.dart';
@@ -37,6 +38,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+//    return CupertinoApp(
+//      title: "",
+//      home: RootPage(),
+//    );
     return MaterialApp(
       title: 'Flutter 商城',
       showSemanticsDebugger: false,
