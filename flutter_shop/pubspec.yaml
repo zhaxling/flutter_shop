@@ -1,0 +1,93 @@
+
+name: flutter_shop
+
+description: 小试牛刀
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # iOS风格库
+  cupertino_icons: ^0.1.2
+  # 网络请求
+  dio: ^3.0.9
+  # 轮播图
+  flutter_swiper : ^1.1.6
+  # 图片缓存、加载
+  cached_network_image: ^2.0.0
+  # 图片 相机、相册
+  photo: ^0.4.8
+  # 安卓不能用
+  camera: ^0.5.7+4
+  # 设备
+  device_info: ^0.4.2+1
+  # 屏幕适配
+  flutter_screenutil: ^1.0.2
+  # toast
+  toast: ^0.1.5
+  # 路由导航框架
+  fluro: ^1.6.1
+  # SQLite
+  sqflite: ^1.2.2+1
+  # 二维码
+  barcode_scan: ^2.0.1
+  # url请求
+  url_launcher: ^5.4.2
+  # 刷新加载
+  flutter_easyrefresh: ^2.1.0
+  # 状态管理器
+  provide: ^1.0.2
+  # 常用工具 https://www.jianshu.com/p/425a7ff9d66e
+  common_utils: ^1.1.3
+  flustars: ^0.2.6+1
+  # 文件目录
+  path_provider: ^1.6.5
+  # 自定义Header，索引，悬停效果
+  azlistview: ^0.1.2
+  # 汉字转拼音
+  lpinyin: ^1.0.9
+  # 视频播放
+  video_player: ^0.10.8+1
+
+# 导入方式
+#    flutter_easyrefresh:
+#      path: 项目路径
+
+# git方式
+#    flutter_easyrefresh:
+#      git:
+#        url: git://github.com/xuelongqy/flutter_easyrefresh.git
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
+
+  # 图片
+  assets:
+    - images/button_top.png
+    - images/icon_enter.png
+    - images/十米桃花.jpeg
+    - json/gov.json
+    - json/ChinaCityList.json
+    - json/安庆市.json
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
