@@ -30,6 +30,7 @@ dependencies:
   flutter_screenutil: ^1.0.2
   # toast
   toast: ^0.1.5
+  fluttertoast: ^4.0.1
   # 路由导航框架
   fluro: ^1.6.1
   # SQLite
@@ -53,6 +54,8 @@ dependencies:
   lpinyin: ^1.0.9
   # 视频播放
   video_player: ^0.10.8+1
+  # 偏好设置
+  shared_preferences: ^0.5.6+3
 
 # 导入方式
 #    flutter_easyrefresh:
@@ -73,6 +76,8 @@ flutter:
 
   # 图片
   assets:
+    - images/login_user.png
+    - images/login_pwd.png
     - images/button_top.png
     - images/icon_enter.png
     - images/十米桃花.jpeg

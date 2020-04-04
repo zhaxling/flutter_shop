@@ -34,7 +34,7 @@ class PositionPage extends StatelessWidget {
       children: <Widget>[
         Container(
           width: ScreenUtil.screenWidth,
-          height: (ScreenUtil.screenHeight-1344),
+          height: ScreenUtil.screenHeight * 0.25,
           color: Colors.orange,
           child: Text('123'),
         ),

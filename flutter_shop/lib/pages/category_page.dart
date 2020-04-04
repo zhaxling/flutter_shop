@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shop/pages/category/richtext_page.dart';
 import '../CitySelect/city_select_page.dart';
 import 'category/photo_page.dart';
 import 'category/position_page.dart';
@@ -18,7 +19,7 @@ class _CategoryPageState extends State<CategoryPage> {
     'sqflite 数据库',
     '二维码扫描',
     '相册 相机 - 选择照片',
-    'AZListView 头部悬停',
+    '富文本',
     'AZListView 头部悬停',
   ];
 
@@ -69,7 +70,7 @@ class _CategoryPageState extends State<CategoryPage> {
     print("------build------");
     return Scaffold(
       appBar: AppBar(
-        title: Text("页面生命周期"),
+        title: Center(child: Text("页面生命周期"),),
       ),
       body: Center(
         child: ListView.builder(
@@ -107,14 +108,25 @@ class _CategoryPageState extends State<CategoryPage> {
       break;
       case 4: page = PhotoPage();
       break;
+      case 5: page = RichTextPage();
+      break;
+
     }
 
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context){
-        return page;
-      })
-    );
+    Navigator.of(
+        context,
+        rootNavigator: true
+    ).push(
+        MaterialPageRoute(
+            builder: (context){
+                return page;
+    }));
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(builder: (context){
+//        return page;
+//      })
+//    );
   }
 }

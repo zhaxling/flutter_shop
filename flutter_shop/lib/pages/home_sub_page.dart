@@ -95,7 +95,7 @@ class _HomeSubPage extends State<HomeSubPage>  with AutomaticKeepAliveClientMixi
       enableControlFinishLoad: true,
       header: ClassicalHeader(),
       footer: ClassicalFooter(),
-      child: ListView.builder(
+      child: ListView.separated(
 //          padding: EdgeInsets.all(5.0),
           itemCount: groupList.length + 1,
 //          itemExtent: 50.0,
@@ -107,7 +107,11 @@ class _HomeSubPage extends State<HomeSubPage>  with AutomaticKeepAliveClientMixi
             else {
               return _createListItem(index-1);
             }
-          }
+          },
+        separatorBuilder: (context, index) {
+            if (index == 0) return Divider(color: Colors.white,);
+          return Divider(color: Colors.black12, indent: 16.0, endIndent: 16.0,);
+        },
       ),
       onRefresh: () async {
         Future.delayed(Duration(seconds: 2), (){
@@ -125,7 +129,7 @@ class _HomeSubPage extends State<HomeSubPage>  with AutomaticKeepAliveClientMixi
 
   // 创建头部
   Widget _createListHeader() {
-    return ETSwiper();
+    return ETSwiper(items: cycleList,);
   }
   
   // 创建列表
@@ -146,7 +150,7 @@ class _HomeSubPage extends State<HomeSubPage>  with AutomaticKeepAliveClientMixi
   // 创建组
   Widget _createListGroup(NewGroupModel model) {
     print(model.childList);
-    return ListView.builder(
+    return ListView.separated(
         itemCount: model.childList.length,
         shrinkWrap: true,// 解决无限高度问题
         physics: NeverScrollableScrollPhysics(), // 禁用滑动事件
@@ -166,13 +170,22 @@ class _HomeSubPage extends State<HomeSubPage>  with AutomaticKeepAliveClientMixi
               return NewsItemType4(model: child);
             }
           }
-          return Text(model.childList[index].chinaTitle);
-        });
+          return null;
+        },
+        separatorBuilder: (context, index) {// 分割线
+            return Divider(
+              color: Colors.black12,
+              indent: 16,
+              endIndent: 16.0,
+            );
+        },
+    );
   }
   
   /// 创建每组头部
   Widget _createListGroupHeader(NewGroupModel model) {
     return Container(
+//      color: Colors.orange,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(width: 1.0, color: Colors.black12))
       ),
@@ -245,10 +258,11 @@ class NewsItemType1 extends NewsItem {
     // TODO: implement build
     return Container(
       width: ScreenUtil.screenWidth,
-//      height: ScreenUtil().setHeight(160),
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
-      ),
+//      color: Colors.orange,
+//      height: ScreenUtil().setHeight(170),
+//      decoration: BoxDecoration(
+//        border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
+//      ),
       child: Column(
         children: <Widget>[
           Container(
@@ -290,20 +304,23 @@ class NewsItemType2 extends NewsItem {
     // TODO: implement build
     return Container(
       width: ScreenUtil.screenWidth,
-      height: ScreenUtil().setHeight(480),
-      color: Colors.red,
+//      decoration: BoxDecoration(
+//        border: Border(
+//          bottom: BorderSide(width: 1.0, color: Colors.black12)
+//        )
+//      ),
       child: Column(
         children: <Widget>[
           _createImage(model.path),
           Container(
-              width: ScreenUtil().setHeight(430),
-              margin: EdgeInsets.only(top: 10.0 ,),
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+              margin: EdgeInsets.only(top: 8.0 ,bottom: 16.0),
+              padding: EdgeInsets.only(left: 18.0,),
+              width: ScreenUtil.screenWidth - 16.0,
               child: Text(
                 model.chinaTitle,
                 maxLines: 2,
-                textAlign: TextAlign.left,// 左对齐
-                textDirection: TextDirection.ltr,//文本从左边开始显示
+//                textAlign: TextAlign.left,// 左对齐
+//                textDirection: TextDirection.ltr,//文本从左边开始显示
                 softWrap: true ,
                 style: TextStyle(fontSize: 18.0),
               )
@@ -317,7 +334,7 @@ class NewsItemType2 extends NewsItem {
   Widget _createImage(String path) {
     return Container(
       width: ScreenUtil.screenWidth - 16,
-      margin: EdgeInsets.only(left: 8.0),
+      margin: EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
       child: AspectRatio(
         aspectRatio: 1.5,
         child: CachedNetworkImage(
@@ -340,38 +357,40 @@ class NewsItemType3 extends NewsItem {
     return Container(
       width: ScreenUtil.screenWidth,
       height: ScreenUtil().setHeight(200),
-      decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
-      ),
+//      decoration: BoxDecoration(
+//          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
+//      ),
 //      color: Colors.orange,
       child: Row(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                  width: ScreenUtil().setHeight(450),
-                  margin: EdgeInsets.only(top: 10.0 ),
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Text(
-                    model.chinaTitle,
-                    maxLines: 2,
-                    textAlign: TextAlign.left,// 左对齐
-                    textDirection: TextDirection.ltr,//文本从左边开始显示
-                    softWrap: true ,
-                    style: TextStyle(fontSize: 18.0),
-                  )
-              ),
-              Container(
-                width: ScreenUtil().setHeight(430),
-                margin: EdgeInsets.only(top: 8.0 ,),
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                child: Text(
-                  model.inforSources + model.recordDate,
-                  maxLines: 2,
-                  style: TextStyle(color: Colors.black45 , fontSize: 14.0),
+          Container(
+            width: ScreenUtil().setWidth(440),
+            margin: EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0, bottom: 10.0),
+            child: Column(
+              children: <Widget>[
+                Container(
+//                    margin: EdgeInsets.only(top: 10.0 ),
+//                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Text(
+                      model.chinaTitle,
+                      maxLines: 2,
+                      textAlign: TextAlign.left,// 左对齐
+                      textDirection: TextDirection.ltr,//文本从左边开始显示
+                      softWrap: true ,
+                      style: TextStyle(fontSize: 18.0),
+                    )
                 ),
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.only(top: 8.0 ,),
+//                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Text(
+                    model.inforSources + model.recordDate,
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.black45 , fontSize: 14.0),
+                  ),
+                ),
+              ],
+            ),
           ),
           _createSmallImage(model.path)
         ],
@@ -383,16 +402,26 @@ class NewsItemType3 extends NewsItem {
   Widget _createSmallImage(String path) {
     return Container(
       width: ScreenUtil().setWidth(220),
-      margin: EdgeInsets.only(right: 16.0,),
-      child: AspectRatio(
-        aspectRatio: 1.4,
-        child: CachedNetworkImage(
-          fit: BoxFit.fill,
-          imageUrl: path,
-          placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),
-      ),);
+      margin: EdgeInsets.only(top: 12.0, right: 16.0,),
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            left: 0,
+            top: 0,
+            right: 0,
+            child: AspectRatio(
+              aspectRatio: 1.4,
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl: path,
+                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ),
+          ),
+        ],
+      )
+    );
   }
 }
 
@@ -410,9 +439,9 @@ class NewsItemType4 extends NewsItem {
       width: ScreenUtil.screenWidth,
       height: ScreenUtil().setHeight(330),
 //      color: Colors.red,
-      decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
-      ),
+//      decoration: BoxDecoration(
+//          border: Border(bottom: BorderSide(width: 1, color: Colors.black12))
+//      ),
       child: Column(
         children: <Widget>[
           Container(

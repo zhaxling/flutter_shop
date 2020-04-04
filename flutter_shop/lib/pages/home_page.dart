@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('首页'),
+        title: Center(child: Text('首页'),),
         bottom: TabBar(
           tabs: items,
           controller: _tabController,
